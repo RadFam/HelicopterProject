@@ -15,6 +15,8 @@ public class PlayerMove : MonoBehaviour
 
 	[SerializeField]
 	Rigidbody myRigid;
+	[SerializeField]
+	ButtonController buttonController;
 
 	Vector3 fullVelocity;
 	float frwdM = 0;
@@ -33,7 +35,7 @@ public class PlayerMove : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	void FixedUpdate () 
 	{
 		CheckForPress();
 	}
@@ -51,6 +53,29 @@ public class PlayerMove : MonoBehaviour
 
 		updnM = Input.GetAxisRaw("Vertical");
 		rotM = Input.GetAxisRaw("Horizontal");
+
+#if UNITY_ANDROID
+		if (buttonController.UpBtn.IsPressed)
+		{
+			updnM = 1;
+		}
+		if (buttonController.DownBtn.IsPressed)
+		{
+			updnM = -1;
+		}
+		if (buttonController.LeftBtn.IsPressed)
+		{
+			rotM = -1;
+		}
+		if (buttonController.RightBtn.IsPressed)
+		{
+			rotM = 1;
+		}
+		if (buttonController.MoveBtn.IsPressed)
+		{
+			frwdM = 1;
+		}
+#endif
 
 		if (canMove)
 		{

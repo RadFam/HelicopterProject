@@ -23,7 +23,7 @@ public class UIControl : MonoBehaviour
 	
 	public void ShowCollide()
 	{
-		Debug.Log("Show collide");
+		//Debug.Log("Show collide");
 		collisionTxt.gameObject.SetActive(true);
 	}
 }
