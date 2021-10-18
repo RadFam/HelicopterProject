@@ -12,7 +12,7 @@ public class EnemyHelicopterBaseAI : MonoBehaviour
 	[SerializeField]
 	Rigidbody myRB;
 	[SerializeField]
-	Collider myCollider;
+	EnemyVPControl visualPart;
 	[SerializeField]
 	float myRBsphere;
 	[SerializeField]
@@ -199,10 +199,12 @@ public class EnemyHelicopterBaseAI : MonoBehaviour
 		CheckForTargetPoint();
 		CheckRotation();
 
-
         // Вычисляем вектор скорости движения
         myRB.velocity = myRB.transform.forward * cruisingSpeed;
 		obstacleCheckTimer += Time.deltaTime;
+
+		visualPart.SetForwardOrientation(new Vector3(-myRB.transform.forward.z, 0, myRB.transform.forward.x));
+		
 	}
 
 	void OnDrawGizmosSelected()
